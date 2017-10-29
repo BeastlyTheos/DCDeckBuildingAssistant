@@ -7,5 +7,14 @@ require "sql.php";
 
 session_start();
 
+if ( ! isset($_SESSION["cards"]) )
+	{
+	$_SESSION["cards"] = array();
+	$res = $sql->query("select * from cards");
+	while ( $row = $res->fetch_assoc())
+		$_SESSION["cards"][$row["id"]] = $row;
+	}
+$cards = $_SESSION["cards"];
+
 $twig->display("index.html", array("cards"=>$cards));
 ?>
