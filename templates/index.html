@@ -5,7 +5,7 @@
 {% block body %}
 <h2>master List</h2>
 <form action="" method="post">
-<input name="formName" value="cards" type="hidden"/>
+<input name="formName" value="card_list" type="hidden"/>
 <table>
 <caption>master list</caption>
 <thead><tr><th></th><th>name</th><th>text</th></tr></thead>
@@ -15,5 +15,6 @@
 {% endfor %}
 </tbody>
 </table>
+<input name="submit" type="submit" value="create"/>
 </form>
 {% endblock body %}
