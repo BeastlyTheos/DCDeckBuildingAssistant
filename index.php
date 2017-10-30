@@ -41,6 +41,17 @@ if ( isset($_POST["formName"]) )
 	{
 	switch ( $_POST["formName"] )
 		{
+		case "hand":
+			{
+			if ( "discard" == $_POST["submit"] )
+				{
+				foreach ( array_keys($_POST) as $key )
+					if ( "on" == $_POST[$key] )
+						$hand->moveCardTo ( $key, $discard);
+				}//end moving to hand
+
+			break;
+			}//end hand form
 		case "deck":
 			{
 			if ( "deal" == $_POST["submit"] )
