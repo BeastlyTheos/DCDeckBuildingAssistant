@@ -8,6 +8,10 @@ require "CardCollection.php";
 
 session_start();
 
+if ( ! isset($_SESSION["discard"]) )
+	$_SESSION["discard"] = new CardCollection();
+$discard = $_SESSION["discard"];
+
 if ( ! isset($_SESSION["lineup"]) )
 	$_SESSION["lineup"] = new CardCollection();
 $lineup = $_SESSION["lineup"];
@@ -31,10 +35,18 @@ if ( isset($_POST["formName"]) )
 		{
 		case "lineup":
 			{
-			if ( "destroy" == $_POST["submit"] )
+			if ( "aquire" == $_POST["submit"] )
+				{
+				foreach ( array_keys($_POST) as $key )
+					if ( "on" == $_POST[$key] )
+						$lineup->moveCardTo( $key, $discard);
+				}
+			elseif ( "destroy" == $_POST["submit"] )
+				{
 				foreach ( array_keys($_POST) as $key )
 					if ( "on" == $_POST[$key] )
 						$lineup->destroyCard($key);
+				}
 
 			break;
 			}//end lineup form
@@ -52,6 +64,7 @@ if ( isset($_POST["formName"]) )
 $_SESSION["lineup"] = $lineup;
 $_SESSION["cards"] = $cards;
 $_SESSION["numCardsDealt"] = CardCollection::$numCardsDealt;
+$_SESSION["discard"] = $discard;
 
 $twig->display("index.html", array("cards"=>$cards, "lineup"=>$lineup));
 ?>
