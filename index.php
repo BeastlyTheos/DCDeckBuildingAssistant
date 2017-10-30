@@ -33,6 +33,17 @@ if ( isset($_POST["formName"]) )
 	{
 	switch ( $_POST["formName"] )
 		{
+		case "discard":
+			{
+			if ( "destroy" == $_POST["submit"] )
+				{
+				foreach ( array_keys($_POST) as $key )
+					if ( "on" == $_POST[$key] )
+						$discard->destroyCard( $key);
+				}//end destroying
+
+			break;
+			}//end discard form
 		case "lineup":
 			{
 			if ( "aquire" == $_POST["submit"] )
