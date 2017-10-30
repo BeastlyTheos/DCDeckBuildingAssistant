@@ -88,5 +88,5 @@ $_SESSION["numCardsDealt"] = CardCollection::$numCardsDealt;
 $_SESSION["discard"] = $discard;
 $_SESSION["deck"] = $deck;
 
-$twig->display("index.html", array("cards"=>$cards, "lineup"=>$lineup, "discard"=>$discard));
+$twig->display("index.html", array("cards"=>$cards, "lineup"=>$lineup, "discard"=>$discard, "deck"=>$deck));
 ?>

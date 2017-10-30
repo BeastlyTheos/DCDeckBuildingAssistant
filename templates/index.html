@@ -3,6 +3,20 @@
 {% block title %}DC cards{% endblock title %}
 
 {% block body %}
+<h2>deck</h2>
+<form action="" method="post">
+<input name="formName" value="deck" type="hidden"/>
+<table>
+<caption>deck</caption>
+<thead><tr><th></th><th>name</th><th>power</th><th>text</th></tr></thead>
+<tbody>
+{% for card in deck %}
+<tr><td><input name="{{card.id}}" id="{{card.id}}" type="checkbox"/></td><td>{{card.name}}, {{card.type}}</td><td>{{card.power}}</td><td>{{card.text}}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+</form>
+
 <h2>discard</h2>
 <form action="" method="post">
 <input name="formName" value="discard" type="hidden"/>
