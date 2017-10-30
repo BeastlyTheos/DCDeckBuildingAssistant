@@ -3,6 +3,20 @@
 {% block title %}DC cards{% endblock title %}
 
 {% block body %}
+<h2>lineup</h2>
+<form action="" method="post">
+<input name="formName" value="lineup" type="hidden"/>
+<table>
+<caption>lineup</caption>
+<thead><tr><th></th><th>name</th><th>cost</th><th>VP</th><th>power</th><th>text</th></tr></thead>
+<tbody>
+{% for card in lineup %}
+<tr><td><input name="{{card.id}}" id="{{card.id}}" type="checkbox"/></td><td>{{card.name}}, {{card.type}}</td><td>{{card.cost}}</td><td>{{card.VP}}</td><td>{{card.power}}</td><td>{{card.text}}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+</form>
+
 <h2>master List</h2>
 <form action="" method="post">
 <input name="formName" value="card_list" type="hidden"/>
