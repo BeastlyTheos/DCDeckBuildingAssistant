@@ -43,12 +43,14 @@ if ( isset($_POST["formName"]) )
 		{
 		case "hand":
 			{
-			if ( "discard" == $_POST["submit"] )
+			if ( "end_turn" == $_POST["submit"] )
+				$hand->moveAllCardsTo ( $discard);
+			elseif ( "discard" == $_POST["submit"] )
 				{
 				foreach ( array_keys($_POST) as $key )
 					if ( "on" == $_POST[$key] )
 						$hand->moveCardTo ( $key, $discard);
-				}//end moving to hand
+				}//end discarding from hand
 
 			break;
 			}//end hand form
@@ -65,7 +67,9 @@ if ( isset($_POST["formName"]) )
 			}//end hand form
 		case "discard":
 			{
-			if ( "undeal" == $_POST["submit"] )
+			if ( "shuffle" == $_POST["submit"] )
+				$discard->moveAllCardsTo( $deck);
+			elseif ( "undeal" == $_POST["submit"] )
 				{
 				foreach ( array_keys($_POST) as $key )
 					if ( "on" == $_POST[$key] )

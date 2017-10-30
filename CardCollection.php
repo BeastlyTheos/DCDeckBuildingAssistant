@@ -19,6 +19,12 @@ public function createCard( $card)
 public function destroyCard($id)
 	{unset($this->cards[$id]);}
 
+public function moveAllCardsTo( $recipient)
+	{
+	foreach ( $this->cards as $card )
+		$this->moveCardTo( $card["id"], $recipient);
+	}//end move all cards
+
 public function moveCardTo( $id, $recipient)
 	{
 	$recipient->recieveCard( $this->cards[$id]);
