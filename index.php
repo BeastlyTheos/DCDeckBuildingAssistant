@@ -8,6 +8,10 @@ require "CardCollection.php";
 
 session_start();
 
+if ( ! isset($_SESSION["hand"]) )
+	$_SESSION["hand"] = new CardCollection();
+$hand = $_SESSION["hand"];
+
 if ( ! isset($_SESSION["deck"]) )
 	$_SESSION["deck"] = new CardCollection();
 $deck = $_SESSION["deck"];
@@ -37,6 +41,17 @@ if ( isset($_POST["formName"]) )
 	{
 	switch ( $_POST["formName"] )
 		{
+		case "deck":
+			{
+			if ( "deal" == $_POST["submit"] )
+				{
+				foreach ( array_keys($_POST) as $key )
+					if ( "on" == $_POST[$key] )
+						$deck->moveCardTo ( $key, $hand);
+				}//end moving to deck
+
+			break;
+			}//end hand form
 		case "discard":
 			{
 			if ( "undeal" == $_POST["submit"] )
@@ -87,6 +102,7 @@ $_SESSION["cards"] = $cards;
 $_SESSION["numCardsDealt"] = CardCollection::$numCardsDealt;
 $_SESSION["discard"] = $discard;
 $_SESSION["deck"] = $deck;
+$_SESSION["hand"] = $hand;
 
 $twig->display("index.html", array("cards"=>$cards, "lineup"=>$lineup, "discard"=>$discard, "deck"=>$deck));
 ?>
