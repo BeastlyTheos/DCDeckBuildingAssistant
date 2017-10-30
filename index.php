@@ -8,22 +8,6 @@ require "CardCollection.php";
 
 session_start();
 
-if ( ! isset($_SESSION["hand"]) )
-	$_SESSION["hand"] = new CardCollection();
-$hand = $_SESSION["hand"];
-
-if ( ! isset($_SESSION["deck"]) )
-	$_SESSION["deck"] = new CardCollection();
-$deck = $_SESSION["deck"];
-
-if ( ! isset($_SESSION["discard"]) )
-	$_SESSION["discard"] = new CardCollection();
-$discard = $_SESSION["discard"];
-
-if ( ! isset($_SESSION["lineup"]) )
-	$_SESSION["lineup"] = new CardCollection();
-$lineup = $_SESSION["lineup"];
-
 if ( ! isset($_SESSION["cards"]) )
 	{
 	$_SESSION["cards"] = array();
@@ -36,6 +20,28 @@ $cards = $_SESSION["cards"];
 if ( ! isset($_SESSION["numCardsDealt"]) )
 	$_SESSION["numCardsDealt"] = 0;
 CardCollection::$numCardsDealt = $_SESSION["numCardsDealt"];
+
+if ( ! isset($_SESSION["hand"]) )
+	$_SESSION["hand"] = new CardCollection();
+$hand = $_SESSION["hand"];
+
+if ( ! isset($_SESSION["deck"]) )
+	{
+	$_SESSION["deck"] = new CardCollection();
+	for ( $i = 0 ; $i < 7 ; $i++ )
+		$_SESSION["deck"]->createCard( $cards[323]); //initialise 7 punches
+	for ( $i = 0 ; $i < 3 ; $i++ )
+	$_SESSION["deck"]->createCard( $cards[429]); //initialise 3 vulnerabilities
+	}
+$deck = $_SESSION["deck"];
+
+if ( ! isset($_SESSION["discard"]) )
+	$_SESSION["discard"] = new CardCollection();
+$discard = $_SESSION["discard"];
+
+if ( ! isset($_SESSION["lineup"]) )
+	$_SESSION["lineup"] = new CardCollection();
+$lineup = $_SESSION["lineup"];
 
 if ( isset($_POST["formName"]) )
 	{
