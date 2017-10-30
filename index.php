@@ -104,5 +104,5 @@ $_SESSION["discard"] = $discard;
 $_SESSION["deck"] = $deck;
 $_SESSION["hand"] = $hand;
 
-$twig->display("index.html", array("cards"=>$cards, "lineup"=>$lineup, "discard"=>$discard, "deck"=>$deck));
+$twig->display("index.html", array("cards"=>$cards, "lineup"=>$lineup, "discard"=>$discard, "deck"=>$deck, "hand"=>$hand));
 ?>
