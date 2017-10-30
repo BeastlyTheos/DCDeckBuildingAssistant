@@ -15,5 +15,8 @@ public function createCard( $card)
 	$card["id"] = self::$numCardsDealt++;
 	$this->cards[$card["id"]] = $card;
 	}//end create card
+
+public function destroyCard($id)
+	{unset($this->cards[$id]);}
 }// end class CardCollection
 ?>

@@ -29,6 +29,15 @@ if ( isset($_POST["formName"]) )
 	{
 	switch ( $_POST["formName"] )
 		{
+		case "lineup":
+			{
+			if ( "destroy" == $_POST["submit"] )
+				foreach ( array_keys($_POST) as $key )
+					if ( "on" == $_POST[$key] )
+						$lineup->destroyCard($key);
+
+			break;
+			}//end lineup form
 		case "card_list":
 			{
 			foreach ( array_keys($_POST) as $key )
