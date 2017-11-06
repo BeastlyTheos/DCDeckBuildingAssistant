@@ -15,7 +15,7 @@ if ( ! isset($_SESSION["cards"]) )
 	while ( $row = $res->fetch_assoc())
 		$_SESSION["cards"][$row["id"]] = $row;
 	}
-$cards = $_SESSION["cards"];
+CardCollection::$masterList = $_SESSION["cards"];
 
 if ( ! isset($_SESSION["numCardsDealt"]) )
 	$_SESSION["numCardsDealt"] = 0;
@@ -29,9 +29,9 @@ if ( ! isset($_SESSION["deck"]) )
 	{
 	$_SESSION["deck"] = new CardCollection();
 	for ( $i = 0 ; $i < 7 ; $i++ )
-		$_SESSION["deck"]->createCard( $cards[323]); //initialise 7 punches
+		$_SESSION["deck"]->createCardByID( 323); //initialise 7 punches
 	for ( $i = 0 ; $i < 3 ; $i++ )
-	$_SESSION["deck"]->createCard( $cards[429]); //initialise 3 vulnerabilities
+	$_SESSION["deck"]->createCardByID( 429); //initialise 3 vulnerabilities
 	}
 $deck = $_SESSION["deck"];
 
@@ -111,7 +111,7 @@ if ( isset($_POST["formName"]) )
 			{
 			foreach ( array_keys($_POST) as $key )
 				if ( "on" == $_POST[$key] )
-					$lineup->createCard( $cards[$key]);
+					$lineup->createCardByID( $key);
 
 			break;
 			}//end cards form
@@ -119,7 +119,7 @@ if ( isset($_POST["formName"]) )
 	}// end if formName is set
 
 $_SESSION["lineup"] = $lineup;
-$_SESSION["cards"] = $cards;
+$_SESSION["cards"] = CardCollection::$masterList;
 $_SESSION["numCardsDealt"] = CardCollection::$numCardsDealt;
 $_SESSION["discard"] = $discard;
 $_SESSION["deck"] = $deck;

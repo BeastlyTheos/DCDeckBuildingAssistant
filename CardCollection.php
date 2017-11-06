@@ -1,6 +1,7 @@
 <?php
 class CardCollection implements IteratorAggregate
 {
+public static $masterList;
 public static $numCardsDealt;
 public $cards;
 
@@ -10,10 +11,14 @@ public function __construct()
 public function getIterator()
 	{return new ArrayIterator( $this->cards);}
 
-public function createCard( $card)
+public function createCardByID( $id)
 	{
-	$card["id"] = self::$numCardsDealt++;
-	$this->cards[$card["id"]] = $card;
+	if ( isset(self::$masterList[$id]) )
+		{
+		$card = self::$masterList[$id];
+		$card["id"] = self::$numCardsDealt++;
+		$this->cards[$card["id"]] = $card;
+		}
 	}//end create card
 
 public function destroyCard($id)
@@ -27,11 +32,17 @@ public function moveAllCardsTo( $recipient)
 
 public function moveCardTo( $id, $recipient)
 	{
-	$recipient->recieveCard( $this->cards[$id]);
-	$this->destroyCard($id);
+	if ( isset($this->cards[$id]) )
+		{
+		$recipient->recieveCard( $this->cards[$id]);
+		$this->destroyCard($id);
+		}
 	}//end move card
 
 private function recieveCard($card)
-	{$this->cards[ $card["id"]] = $card;}
+	{
+	if ( $card["id"] )
+		$this->cards[ $card["id"]] = $card;
+	}
 }// end class CardCollection
 ?>
