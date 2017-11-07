@@ -13,10 +13,18 @@
 {% for card in hand %}
 <tr><td><input name="{{card.id}}" id="{{card.id}}" type="checkbox"/></td><td>{{card.name}}, {{card.type}}</td><td>{{card.power}}</td><td>{{card.text}}</td></tr>
 {% endfor %}
+{% if ongoings.cards|length %}
+<tr><td></td><td></td><td></td><td></td></tr>
+{% for card in ongoings %}
+<tr><td><input name="{{card.id}}" id="{{card.id}}" type="checkbox"/></td><td>{{card.name}}, {{card.type}}</td><td>{{card.power}}</td><td>{{card.text}}</td></tr>
+{% endfor %}
+{% endif %}
 </tbody>
 </table>
 <input name="submit" type="submit" Value="discard"/>
 <input name="submit" type="submit" Value="end_turn"/>
+<input name="submit" type="submit" Value="pin"/>
+<input name="submit" type="submit" Value="unpin"/>
 </form>
 
 <h2>deck</h2>
