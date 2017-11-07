@@ -25,6 +25,10 @@ if ( ! isset($_SESSION["hand"]) )
 	$_SESSION["hand"] = new CardCollection();
 $hand = $_SESSION["hand"];
 
+if ( ! isset($_SESSION["ongoings"]) )
+	$_SESSION["ongoings"] = new CardCollection();
+$ongoings = $_SESSION["ongoings"];
+
 if ( ! isset($_SESSION["deck"]) )
 	{
 	$_SESSION["deck"] = new CardCollection();
@@ -57,6 +61,18 @@ if ( isset($_POST["formName"]) )
 					if ( "on" == $_POST[$key] )
 						$hand->moveCardTo ( $key, $discard);
 				}//end discarding from hand
+			elseif ( "pin" == $_POST["submit"] )
+				{
+				foreach ( array_keys($_POST) as $key )
+					if ( "on" == $_POST[$key] )
+						$hand->moveCardTo ( $key, $ongoings);
+				}//end pinning
+			elseif ( "unpin" == $_POST["submit"] )
+				{
+				foreach ( array_keys($_POST) as $key )
+					if ( "on" == $_POST[$key] )
+						$ongoings->moveCardTo ( $key, $hand);
+				}//end unpinning
 
 			break;
 			}//end hand form
@@ -124,6 +140,7 @@ $_SESSION["numCardsDealt"] = CardCollection::$numCardsDealt;
 $_SESSION["discard"] = $discard;
 $_SESSION["deck"] = $deck;
 $_SESSION["hand"] = $hand;
+$_SESSION["ongoings"] = $ongoings;
 
-$twig->display("index.html", array("cards"=>$cards, "lineup"=>$lineup, "discard"=>$discard, "deck"=>$deck, "hand"=>$hand));
+$twig->display("index.html", array("cards"=>CardCollection::$masterList, "lineup"=>$lineup, "discard"=>$discard, "deck"=>$deck, "hand"=>$hand, "ongoings"=>$ongoings));
 ?>
