@@ -3,6 +3,7 @@
 {% block title %}DC cards{% endblock title %}
 
 {% block body %}
+<div class="Left">
 <h2>hand</h2>
 <form action="" method="post">
 <input name="formName" value="hand" type="hidden"/>
@@ -21,44 +22,16 @@
 {% endif %}
 </tbody>
 </table>
+<div class="FormButtons">
 <input name="submit" type="submit" Value="discard"/>
 <input name="submit" type="submit" Value="end_turn"/>
 <input name="submit" type="submit" Value="pin"/>
 <input name="submit" type="submit" Value="unpin"/>
+</div>
 </form>
+</div>
 
-<h2>deck</h2>
-<form action="" method="post">
-<input name="formName" value="deck" type="hidden"/>
-<table>
-<caption>deck</caption>
-<thead><tr><th></th><th>name</th><th>power</th><th>text</th></tr></thead>
-<tbody>
-{% for card in deck %}
-<tr><td><input name="{{card.id}}" id="{{card.id}}" type="checkbox"/></td><td>{{card.name}}, {{card.type}}</td><td>{{card.power}}</td><td>{{card.text}}</td></tr>
-{% endfor %}
-</tbody>
-</table>
-<input name="submit" type="submit" Value="deal"/>
-</form>
-
-<h2>discard</h2>
-<form action="" method="post">
-<input name="formName" value="discard" type="hidden"/>
-<table>
-<caption>discard</caption>
-<thead><tr><th></th><th>name</th><th>power</th><th>text</th></tr></thead>
-<tbody>
-{% for card in discard %}
-<tr><td><input name="{{card.id}}" id="{{card.id}}" type="checkbox"/></td><td>{{card.name}}, {{card.type}}</td><td>{{card.power}}</td><td>{{card.text}}</td></tr>
-{% endfor %}
-</tbody>
-</table>
-<input name="submit" type="submit" Value="destroy"/>
-<input name="submit" type="submit" Value="undeal"/>
-<input name="submit" type="submit" Value="shuffle"/>
-</form>
-
+<div class="Right">
 <h2>lineup</h2>
 <form action="" method="post">
 <input name="formName" value="lineup" type="hidden"/>
@@ -71,9 +44,52 @@
 {% endfor %}
 </tbody>
 </table>
+<div class="FormButtons">
 <input name="submit" type="submit" Value="destroy"/>
 <input name="submit" type="submit" Value="aquire"/>
+</div>
 </form>
+</div>
+
+<div class="Left">
+<h2>deck</h2>
+<form action="" method="post">
+<input name="formName" value="deck" type="hidden"/>
+<table>
+<caption>deck</caption>
+<thead><tr><th></th><th>name</th><th>power</th><th>text</th></tr></thead>
+<tbody>
+{% for card in deck %}
+<tr><td><input name="{{card.id}}" id="{{card.id}}" type="checkbox"/></td><td>{{card.name}}, {{card.type}}</td><td>{{card.power}}</td><td>{{card.text}}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+<div class="FormButtons">
+<input name="submit" type="submit" Value="deal"/>
+</div>
+</form>
+</div>
+
+<div class="Right">
+<h2>discard</h2>
+<form action="" method="post">
+<input name="formName" value="discard" type="hidden"/>
+<table>
+<caption>discard</caption>
+<thead><tr><th></th><th>name</th><th>power</th><th>text</th></tr></thead>
+<tbody>
+{% for card in discard %}
+<tr><td><input name="{{card.id}}" id="{{card.id}}" type="checkbox"/></td><td>{{card.name}}, {{card.type}}</td><td>{{card.power}}</td><td>{{card.text}}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+<div class="FormButtons">
+<input name="submit" type="submit" Value="destroy"/>
+<input name="submit" type="submit" Value="undeal"/>
+<input name="submit" type="submit" Value="shuffle"/>
+</div>
+</form>
+</div>
 
 <h2>master List</h2>
 <form action="" method="post">
@@ -87,6 +103,8 @@
 {% endfor %}
 </tbody>
 </table>
+<div class="FormButtons">
 <input name="submit" type="submit" value="create"/>
+</div>
 </form>
 {% endblock body %}
